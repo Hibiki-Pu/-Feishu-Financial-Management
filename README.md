@@ -1,100 +1,138 @@
-# vinext-starter
+# 飞书企业财务管理系统
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+> 面向企业内部财务、人事与研发部门的数据管理和经营分析驾驶舱。
 
-## Prerequisites
+![React](https://img.shields.io/badge/React-19.2-149ECA?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
+![Vinext](https://img.shields.io/badge/Vinext-1.0-111827)
+![Drizzle ORM](https://img.shields.io/badge/Drizzle%20ORM-0.45-C5F74F?logo=drizzle&logoColor=111827)
 
-- Node.js `>=22.13.0`
+## 项目简介
 
-## Quick Start
+飞书企业财务管理系统是一套面向企业内部管理场景的数据可视化 Web 应用。系统将财务、人事、研发等部门的关键数据集中到统一驾驶舱中，帮助管理人员快速了解人工成本、研发投入、预算执行率、项目费用及单据状态。
+
+项目以求职作品集为目标进行设计，重点展示数据看板、复杂表格、条件筛选、数据录入、批量导入和响应式界面的实现能力。
+
+> 当前仓库为前端演示版本，页面数据来自虚拟企业数据集，不包含真实企业或个人敏感信息。部分上传、导出和持久化功能目前以交互演示为主。
+
+## 功能截图
+
+![飞书企业财务管理驾驶舱](./public/og.png)
+
+## 核心功能
+
+- **经营数据总览**：展示年度人工成本、研发投入、在职人数和预算执行率等核心指标。
+- **部门维度分析**：支持全公司、财政部、人事部、研发部和开发部的数据切换。
+- **月度趋势分析**：通过柱状图对比各月份人工成本与研发投入变化。
+- **预算执行监控**：显示年度预算、已使用金额、剩余额度和执行进度。
+- **研发项目排行**：按照项目累计费用展示研发项目投入情况。
+- **费用明细管理**：集中展示日期、部门、项目、供应商、金额、经办人、发票及付款状态。
+- **搜索与筛选**：支持按项目、供应商和业务状态快速检索费用记录。
+- **单笔数据录入**：通过表单录入部门、项目、费用类别、供应商和付款信息。
+- **批量数据导入**：支持 Excel、XLS 和 CSV 文件选择，并提供标准 CSV 模板下载。
+- **财务文档中心**：集中呈现预算方案、月度报表、报销制度和审计记录。
+- **响应式布局**：兼顾桌面端与移动端显示，减少小屏幕下的文字和组件重叠。
+
+## 技术栈
+
+| 分类 | 技术 | 用途 |
+| --- | --- | --- |
+| 前端框架 | React 19 | 构建组件化交互界面 |
+| 开发语言 | TypeScript 5.9 | 提供类型约束和可维护性 |
+| 全栈框架 | Vinext | 提供页面渲染、路由和构建能力 |
+| 构建工具 | Vite 8 | 本地开发和生产构建 |
+| 样式方案 | CSS / PostCSS | 驾驶舱布局、图表和响应式适配 |
+| 数据层 | Drizzle ORM | 数据模型与数据库访问能力 |
+| 数据库适配 | Cloudflare D1 | 为后续持久化数据提供支持 |
+| 测试与规范 | Node Test / ESLint | 构建验证和代码质量检查 |
+
+## 项目结构
+
+```text
+.
+├─ app/                 # 页面、布局、样式和交互逻辑
+├─ backend/             # 后端相关逻辑
+├─ db/                  # 数据库结构定义
+├─ drizzle/             # 数据库迁移文件
+├─ public/              # 图标和项目展示图片
+├─ tests/               # 自动化测试
+├─ worker/              # Cloudflare Worker 入口
+├─ package.json         # 依赖和项目脚本
+└─ vite.config.ts       # Vite 与 Sites 配置
+```
+
+## 本地运行
+
+### 环境要求
+
+- Node.js `22.13.0` 或更高版本
+- npm `10` 或更高版本
+
+### 启动步骤
 
 ```bash
+# 1. 克隆仓库
+git clone https://github.com/Hibiki-Pu/-Feishu-Financial-Management.git
+
+# 2. 进入项目目录
+cd ./-Feishu-Financial-Management
+
+# 3. 安装依赖
 npm install
+
+# 4. 启动开发环境
 npm run dev
+```
+
+启动成功后访问：
+
+```text
+http://localhost:3000/
+```
+
+## 构建与检查
+
+```bash
+# 生成生产构建
 npm run build
+
+# 执行构建和自动化测试
+npm test
+
+# 执行代码规范检查
+npm run lint
 ```
 
-This starter does not use `wrangler.jsonc`.
+## 数据说明
 
-## Included Shape
+演示数据覆盖 2025—2026 年度的财务、人事和研发业务，包括：
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+- 部门人员规模与人工成本；
+- 年度预算及预算执行情况；
+- 研发项目投入与月度趋势；
+- 供应商、发票和付款状态；
+- 财务制度、报告及审计文档。
 
-## Workspace Auth Headers
+所有展示数据均为虚拟数据，仅用于功能演示和作品展示。
 
-Signed-in visitors receive both `oai-authenticated-user-id` and `oai-authenticated-user-email`. Private Sites require every visitor to sign in; public Sites may also have anonymous visitors, for whom neither header is present.
+## 后续规划
 
-The user ID is stable for the same user on the same Site and different across Sites. Email and name are intended for display or contact purposes.
+- 接入数据库，实现录入和导入数据的持久化；
+- 增加用户登录、角色权限和部门级数据隔离；
+- 完善 Excel 字段校验、错误行反馈及导入确认流程；
+- 增加真实报表导出和财务文档上传功能；
+- 接入飞书开放平台，实现消息通知、审批和云文档联动；
+- 增加单元测试、端到端测试和持续集成流程。
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
+## 项目亮点
 
-Treat the full name as optional and fall back to email when it is absent:
+- 将财务、人事和研发业务数据抽象为统一的可视化驾驶舱；
+- 实现数据密集型后台系统常见的表格、筛选、表单和文件导入交互；
+- 使用 React 与 TypeScript 构建可维护的组件化界面；
+- 针对桌面端和移动端进行响应式适配；
+- 预留数据库、鉴权、飞书开放平台和部署能力的扩展空间。
 
-```tsx
-import { headers } from "next/headers";
+## 作者
 
-export default async function Home() {
-  const requestHeaders = await headers();
-  const userId = requestHeaders.get("oai-authenticated-user-id");
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
+[Hibiki-Pu](https://github.com/Hibiki-Pu)
 
-  const displayName = fullName ?? email;
-  // ...
-}
-```
-
-## Optional Dispatch-Owned ChatGPT Sign-In
-
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
-
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
-
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
-
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
