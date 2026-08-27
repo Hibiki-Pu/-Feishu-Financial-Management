@@ -1,6 +1,7 @@
 {
-  "name": "site-creator-vinext-starter",
+  "name": "feishu-financial-management-dashboard",
   "version": "0.1.0",
+  "description": "企业财务、人事与研发数据可视化管理系统",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
@@ -45,3 +46,4 @@
   },
   "type": "module"
 }
+
